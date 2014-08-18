@@ -69,7 +69,4 @@ class Asset {
       importer.delete(_imported);
     }
   }
-
-  void reload() {
-  }
 }
