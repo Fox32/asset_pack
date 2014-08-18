@@ -18,23 +18,26 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of asset_pack;
+part of asset_pack_browser;
 
-class TextImporter extends AssetImporter {
-  void initialize(Asset asset) {
-    asset.imported = '';
-  }
-  Future<Asset> import(dynamic payload, Asset asset, AssetPackTrace tracer) {
-    tracer.assetImportStart(asset);
-    if (payload is String) {
-      asset.imported = payload;
-    } else {
-      tracer.assetImportError(asset, "A text asset was not a String.");
-    }
-    tracer.assetImportEnd(asset);
-    return new Future.value(asset);
+class VideoLoader extends AssetLoaderBrowser {
+  Future<dynamic> load(Asset asset, AssetPackTrace tracer) {
+    tracer.assetLoadStart(asset);
+    var completer = new Completer<dynamic>();
+    VideoElement video = new VideoElement();
+    video.onCanPlay.listen((event) {
+      tracer.assetLoadEnd(asset);
+      completer.complete(video);
+    });
+    video.onError.listen((error) {
+      tracer.assetLoadError(asset, error.toString());
+      tracer.assetLoadEnd(asset);
+      completer.complete(null);
+    });
+    video.src = asset.url;
+    return completer.future;
   }
 
-  void delete(dynamic imported) {
+  void delete(dynamic arg) {
   }
 }

@@ -18,28 +18,16 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-library asset_pack_tests;
+part of asset_pack_browser;
 
-import 'dart:html';
-import 'dart:async';
-import 'dart:typed_data';
-import 'package:unittest/unittest.dart';
-import 'package:unittest/html_enhanced_config.dart';
-import 'package:asset_pack/asset_pack_browser.dart';
-
-part 'decoder.dart';
-part 'loader.dart';
-part 'importer.dart';
-part 'manager.dart';
-part 'trace_viewer.dart';
-part 'uri_behavior.dart';
-
-main() {
-  useHtmlEnhancedConfiguration();
-  Decoder.runTests();
-  Loader.runTests();
-  Importer.runTests();
-  Manager.runTests();
-  TraceViewer.runTests();
-  UriBehavior.runTests();
+class AssetManagerBrowser extends AssetManager {
+  AssetManagerBrowser([tracer0])
+      : super(tracer0) {
+    loaders['textmap'] = new MapLoader(new TextLoader());
+    loaders['imagemap'] = new MapLoader(new ImageLoader());
+    loaders['json'] = new TextLoader();
+    loaders['text'] = loaders['json'];
+    loaders['pack'] = loaders['json'];
+    loaders['image'] = new ImageLoader();
+  }
 }

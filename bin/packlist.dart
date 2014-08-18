@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:asset_pack/asset_pack_file.dart';
+import 'package:asset_pack/asset_pack_standalone.dart';
 
 AssetPackFile openAssetPackFile(String path) {
   var out = FileSystemEntity.isDirectorySync(path)

@@ -94,10 +94,11 @@ dependencies:
     git: https://github.com/johnmccutchan/asset_pack.git
 ```
 
-2\. Add the correct import for your project.
+2\. Add the correct import for your project. If you are writing a browser
+package use:
 
 ```dart
-import 'package:asset_pack/asset_pack.dart';
+import 'package:asset_pack/asset_pack_browser.dart';
 ```
 
 # Documentation #
@@ -124,7 +125,7 @@ reference other asset packs.
 ```dart
 main() {
   // Construct a new AssetManager.
-  AssetManager assets = new AssetManager();
+  AssetManager assets = new AssetManagerBrowser();
 }
 ```
 
@@ -133,7 +134,7 @@ main() {
 ```dart
 main() {
   // Construct a new AssetManager.
-  AssetManager assets = new AssetManager();
+  AssetManager assets = new AssetManagerBrowser();
   // Load 'explosions' from 'explosions.pack'.
   AssetPack explosions = assets.load('explosions', 'domain/explosions.pack');
 }
@@ -144,7 +145,7 @@ main() {
 ```dart
 main() {
   // Construct a new AssetManager.
-  AssetManager assets = new AssetManager();
+  AssetManager assets = new AssetManagerBrowser();
   // Load 'explosions' from 'explosions.pack'.
   AssetPack explosions = assets.load('explosions', 'domain/explosions.pack');
   // Explosions has a 'dynamite' asset which is a sound clip.
@@ -157,7 +158,7 @@ main() {
 ```dart
 main() {
   // Construct a new AssetManager.
-  AssetManager assets = new AssetManager();
+  AssetManager assets = new AssetManagerBrowser();
   // Register the 'test' pack. No url is needed so the empty string suffices.
   AssetPack testPack = assets.registerPack('test', '');
   // testPack and ['test'] are both the same object.
@@ -173,7 +174,7 @@ main() {
 ```dart
 main() {
   // Construct a new AssetManager.
-  AssetManager assets = new AssetManager();
+  AssetManager assets = new AssetManagerBrowser();
   // Register the 'test' pack. No url is needed so the empty string suffices.
   AssetPack testPack = assets.registerPack('test', '');
   // Register asset 'foo' and load it's contents from 'foo.txt'.

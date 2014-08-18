@@ -18,8 +18,14 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-library asset_pack_file;
+part of asset_pack_browser;
 
-import 'dart:convert';
+class TextLoader extends AssetLoaderBrowser {
+  Future<dynamic> load(Asset asset, AssetPackTrace tracer) {
+    return AssetLoaderBrowser.httpLoadText(asset, tracer);
+  }
 
-part 'src/asset_pack/asset_pack_file.dart';
+  void delete(dynamic arg) {
+
+  }
+}

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:path/path.dart' as path;
 import 'package:unittest/unittest.dart';
-import 'package:asset_pack/asset_pack_file.dart';
+import 'package:asset_pack/asset_pack_standalone.dart';
 
 /// Signature for a packgen test.
 typedef Future PackgenTest(int n);

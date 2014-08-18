@@ -18,7 +18,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of asset_pack;
+part of asset_pack_common;
 
 /// The [Asset] class holds the metadata for an imported asset. The imported
 /// object can be accessed via the [imported] property. Assets belong to a

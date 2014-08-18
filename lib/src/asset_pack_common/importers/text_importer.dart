@@ -18,28 +18,23 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-library asset_pack_tests;
+part of asset_pack_common;
 
-import 'dart:html';
-import 'dart:async';
-import 'dart:typed_data';
-import 'package:unittest/unittest.dart';
-import 'package:unittest/html_enhanced_config.dart';
-import 'package:asset_pack/asset_pack_browser.dart';
+class TextImporter extends AssetImporter {
+  void initialize(Asset asset) {
+    asset.imported = '';
+  }
+  Future<Asset> import(dynamic payload, Asset asset, AssetPackTrace tracer) {
+    tracer.assetImportStart(asset);
+    if (payload is String) {
+      asset.imported = payload;
+    } else {
+      tracer.assetImportError(asset, "A text asset was not a String.");
+    }
+    tracer.assetImportEnd(asset);
+    return new Future.value(asset);
+  }
 
-part 'decoder.dart';
-part 'loader.dart';
-part 'importer.dart';
-part 'manager.dart';
-part 'trace_viewer.dart';
-part 'uri_behavior.dart';
-
-main() {
-  useHtmlEnhancedConfiguration();
-  Decoder.runTests();
-  Loader.runTests();
-  Importer.runTests();
-  Manager.runTests();
-  TraceViewer.runTests();
-  UriBehavior.runTests();
+  void delete(dynamic imported) {
+  }
 }

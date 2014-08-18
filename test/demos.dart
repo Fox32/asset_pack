@@ -21,7 +21,7 @@
 import 'dart:html';
 import 'dart:async';
 import 'dart:math';
-import 'package:asset_pack/asset_pack.dart';
+import 'package:asset_pack/asset_pack_browser.dart';
 
 main() {
   demoWithTestAssets();
@@ -29,24 +29,24 @@ main() {
 }
 
 demoWithTestAssets() {
-  var bar = query("#assetProgressTestAssets");
-  var log = query("#assetLogTestAssets");
+  var bar = querySelector("#assetProgressTestAssets");
+  var log = querySelector("#assetLogTestAssets");
   var tracer = new AssetPackTrace();
 
   var stream = tracer.asStream().asBroadcastStream();
   new ProgressControler(bar).bind(stream);
   new EventsPrintControler(log).bind(stream);
 
-  AssetManager assetManager = new AssetManager(tracer);
+  AssetManager assetManager = new AssetManagerBrowser(tracer);
   assetManager.loadPack('testpack', 'testpack.pack');
   assetManager.loadPack('testpack2', 'testpackbadname.pack');
   assetManager.loadPack('brokenpack', 'brokenpack.pack');
 }
 
 demoWithFakeAssets() {
-  var bar = query("#assetProgressFakeAssets");
-  var barW = query("#assetProgressFakeAssetsOld");
-  var log = query("#assetLogFakeAssets");
+  var bar = querySelector("#assetProgressFakeAssets");
+  var barW = querySelector("#assetProgressFakeAssetsOld");
+  var log = querySelector("#assetLogFakeAssets");
   var tracer = new AssetPackTrace();
 
   var stream = tracer.asStream().asBroadcastStream();
@@ -56,7 +56,7 @@ demoWithFakeAssets() {
 
   var d1s = new Duration(seconds: 1);
   var d2s = new Duration(seconds: 2);
-  AssetManager assetManager = new AssetManager(tracer);
+  AssetManager assetManager = new AssetManagerBrowser(tracer);
   assetManager.loaders['fake'] = new FakeLoaderWait(d2s);
   assetManager.importers['fake'] = new FakeImporterWait(d1s);
   var random = new Random();

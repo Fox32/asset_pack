@@ -18,7 +18,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of asset_pack;
+part of asset_pack_common;
 
 class NoopImporter extends AssetImporter {
   void initialize(Asset asset) {

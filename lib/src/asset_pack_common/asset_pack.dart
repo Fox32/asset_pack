@@ -18,8 +18,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of asset_pack;
-
+part of asset_pack_common;
 
 /**
  * A set of assets. The importer property of an asset can be accessed as if

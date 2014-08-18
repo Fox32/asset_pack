@@ -18,26 +18,22 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of asset_pack;
+/// asset_pack library based on dart:html.
+library asset_pack_browser;
 
-class VideoLoader extends AssetLoader {
-  Future<dynamic> load(Asset asset, AssetPackTrace tracer) {
-    tracer.assetLoadStart(asset);
-    var completer = new Completer<dynamic>();
-    VideoElement video = new VideoElement();
-    video.onCanPlay.listen((event) {
-      tracer.assetLoadEnd(asset);
-      completer.complete(video);
-    });
-    video.onError.listen((error) {
-      tracer.assetLoadError(asset, error.toString());
-      tracer.assetLoadEnd(asset);
-      completer.complete(null);
-    });
-    video.src = asset.url;
-    return completer.future;
-  }
+import 'dart:html';
+import 'dart:math';
+import 'dart:async';
+import 'dart:convert';
+import 'package:asset_pack/asset_pack_common.dart';
+export 'package:asset_pack/asset_pack_common.dart';
 
-  void delete(dynamic arg) {
-  }
-}
+part 'src/asset_pack_browser/asset_manager_browser.dart';
+part 'src/asset_pack_browser/asset_loader_browser.dart';
+part 'src/asset_pack_browser/loaders/arraybuffer_loader.dart';
+part 'src/asset_pack_browser/loaders/blob_loader.dart';
+part 'src/asset_pack_browser/loaders/image_loader.dart';
+part 'src/asset_pack_browser/loaders/map_loader.dart';
+part 'src/asset_pack_browser/loaders/text_loader.dart';
+part 'src/asset_pack_browser/loaders/video_loader.dart';
+part 'src/asset_pack_browser/progress_controler.dart';

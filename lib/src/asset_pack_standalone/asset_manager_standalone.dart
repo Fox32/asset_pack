@@ -18,32 +18,14 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of asset_pack;
+part of asset_pack_standalone;
 
-class JsonImporter extends AssetImporter {
-  void initialize(Asset asset) {
-    asset.imported = {};
-  }
-
-  Future<Asset> import(dynamic payload, Asset asset, AssetPackTrace tracer) {
-    tracer.assetImportStart(asset);
-    try {
-      if (payload is String) {
-        try {
-          var parsed = JSON.decode(payload);
-          asset.imported = parsed;
-        } on FormatException catch (e) {
-          tracer.assetImportError(asset, e.message);
-        }
-      } else {
-        tracer.assetImportError(asset, "A text asset was not a String.");
-      }
-      return new Future.value(asset);
-    } finally {
-      tracer.assetImportEnd(asset);
-    }
-  }
-
-  void delete(dynamic imported) {
+class AssetManagerStandalone extends AssetManager {
+  AssetManagerStandalone([tracer0])
+      : super(tracer0) {
+    loaders['textmap'] = new MapLoader(new TextLoader());
+    loaders['json'] = new TextLoader();
+    loaders['text'] = loaders['json'];
+    loaders['pack'] = loaders['json'];
   }
 }

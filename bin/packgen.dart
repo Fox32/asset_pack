@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:path/path.dart' as path;
-import 'package:asset_pack/asset_pack_file.dart';
+import 'package:asset_pack/asset_pack_standalone.dart';
 
 /// Configuration file for generating .pack files
 class PackGenConfig {

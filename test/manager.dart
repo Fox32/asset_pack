@@ -22,7 +22,7 @@ part of asset_pack_tests;
 
 class Manager {
   static void loadTest() {
-    AssetManager assetManager = new AssetManager();
+    AssetManager assetManager = new AssetManagerBrowser();
     Future<AssetPack> futurePack;
     test('success.', () {
       futurePack = assetManager.loadPack('testpack', 'testpack/_.pack');
@@ -75,7 +75,7 @@ class Manager {
   static void unloadTest() {
     test('unload', () {
       AssetPackTrace trace = new AssetPackTrace();
-      AssetManager assetManager = new AssetManager(trace);
+      AssetManager assetManager = new AssetManagerBrowser(trace);
       Future<AssetPack> futurePack;
       futurePack = assetManager.loadPack('testpack', 'testpack/_.pack');
       futurePack.then(expectAsync((pack) {
@@ -95,7 +95,7 @@ class Manager {
     });
     test('reload', () {
       AssetPackTrace trace = new AssetPackTrace();
-      AssetManager assetManager = new AssetManager(trace);
+      AssetManager assetManager = new AssetManagerBrowser(trace);
       Future<AssetPack> futurePack;
       futurePack = assetManager.loadPack('testpack', 'testpack/_.pack');
       futurePack.then(expectAsync((pack) {
@@ -125,7 +125,7 @@ class Manager {
   static void dynamicPackTest() {
     test('registerAsset', () {
       AssetPackTrace trace = new AssetPackTrace();
-      AssetManager assetManager = new AssetManager(trace);
+      AssetManager assetManager = new AssetManagerBrowser(trace);
       AssetPack pack = assetManager.root.registerPack('packy', '');
       expect(pack.parent, assetManager.root);
       Asset asset1 = pack.registerAsset('text', 'text', '', {}, {});
@@ -163,7 +163,7 @@ class Manager {
   static void dynamicLoadTest() {
     test('loadAndRegisterAsset', () {
       AssetPackTrace trace = new AssetPackTrace();
-      AssetManager assetManager = new AssetManager(trace);
+      AssetManager assetManager = new AssetManagerBrowser(trace);
       Future load = assetManager.loadAndRegisterAsset(
           'test',
           'text',
@@ -196,7 +196,7 @@ class Manager {
 
   static void textMapFromPack() {
     AssetPackTrace trace = new AssetPackTrace();
-    AssetManager assetManager = new AssetManager(trace);
+    AssetManager assetManager = new AssetManagerBrowser(trace);
     var futurePack = assetManager.loadPack('assets', 'text_map_pack/_.pack');
     futurePack.then(expectAsync((_) {
       expect(assetManager['assets'], _);
@@ -211,7 +211,7 @@ class Manager {
 
   static void textMapFromAsset() {
     AssetPackTrace trace = new AssetPackTrace();
-    AssetManager assetManager = new AssetManager(trace);
+    AssetManager assetManager = new AssetManagerBrowser(trace);
     var futureAsset =
         assetManager.root.loadAndRegisterAsset('textmap', 'textmap',
                                                'text_map_pack/textmap.tmap',
@@ -228,7 +228,7 @@ class Manager {
 
   static void imageMapFromPack() {
     AssetPackTrace trace = new AssetPackTrace();
-    AssetManager assetManager = new AssetManager(trace);
+    AssetManager assetManager = new AssetManagerBrowser(trace);
     var futurePack = assetManager.loadPack('assets', 'image_map_pack/_.pack');
     futurePack.then(expectAsync((_) {
       expect(assetManager['assets'], _);
@@ -243,7 +243,7 @@ class Manager {
 
   static void imagetMapFromAsset() {
     AssetPackTrace trace = new AssetPackTrace();
-    AssetManager assetManager = new AssetManager(trace);
+    AssetManager assetManager = new AssetManagerBrowser(trace);
     var futureAsset =
         assetManager.root.loadAndRegisterAsset('imagemap', 'imagemap',
                                                'image_map_pack/imagemap.imap',

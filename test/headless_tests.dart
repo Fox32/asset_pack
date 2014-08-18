@@ -27,7 +27,7 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'package:unittest/unittest.dart';
 import 'package:unittest/html_enhanced_config.dart';
-import 'package:asset_pack/asset_pack.dart';
+import 'package:asset_pack/asset_pack_browser.dart';
 
 part 'decoder.dart';
 part 'loader.dart';

@@ -18,9 +18,9 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of asset_pack;
+part of asset_pack_common;
 
-class AssetManager {
+abstract class AssetManager {
   /** A map from asset type to importers. Add your own importers. */
   final Map<String, AssetImporter> importers = new Map<String, AssetImporter>();
   /** A map from asset type to loader. Add your own loaders. */
@@ -28,8 +28,8 @@ class AssetManager {
 
   final AssetPackTrace tracer;
 
-  AssetManager([tracer0]) :
-    tracer = (tracer0 == null) ? new NullAssetPackTrace() : tracer0 {
+  AssetManager([tracer0])
+      : tracer = (tracer0 == null) ? new NullAssetPackTrace() : tracer0 {
     _root = new AssetPack(this, 'root');
     importers['json'] = new JsonImporter();
     importers['text'] = new TextImporter();
@@ -37,12 +37,6 @@ class AssetManager {
     importers['textmap'] = new NoopImporter();
     importers['imagemap'] = new NoopImporter();
     importers['image'] = new NoopImporter();
-    loaders['textmap'] = new MapLoader(new TextLoader());
-    loaders['imagemap'] = new MapLoader(new ImageLoader());
-    loaders['json'] = new TextLoader();
-    loaders['text'] = loaders['json'];
-    loaders['pack'] = loaders['json'];
-    loaders['image'] = new ImageLoader();
   }
 
   void _supportedTypeCheck(String type) {

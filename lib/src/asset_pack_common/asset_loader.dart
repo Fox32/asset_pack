@@ -18,20 +18,13 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of asset_pack;
+part of asset_pack_common;
 
-class ArrayBufferLoader extends AssetLoader {
-
-  Future<dynamic> load(Asset asset, AssetPackTrace tracer) {
-    return AssetLoader.httpLoad(
-        asset,
-        'arraybuffer',
-        (x) =>  x.response,
-        tracer
-    );
-  }
-
-  void delete(dynamic arg) {
-
-  }
+/// Interface of an [AssetLoader]. An asset loader is responsible
+/// for loading an object from a url pointing to a network or filesystem.
+abstract class AssetLoader {
+  /// Fetch [asset] Url.
+  Future<dynamic> load(Asset asset, AssetPackTrace tracer);
+  /// Delete fetched [arg].
+  void delete(dynamic arg);
 }

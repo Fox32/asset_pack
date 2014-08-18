@@ -18,14 +18,16 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of asset_pack;
+part of asset_pack_common;
 
-class BlobLoader extends AssetLoader {
-  Future<dynamic> load(Asset asset, AssetPackTrace tracer) {
-    return AssetLoader.httpLoad(asset, 'blob', (x) =>  x.response, tracer);
-  }
-
-  void delete(dynamic arg) {
-
-  }
+/// Interface of an [AssetImporter]. An asset importer is responsible for
+/// Initializing the [Asset.imported] field and importing an object
+/// returned from a loader.
+abstract class AssetImporter {
+  /// Must initialize imported field in [asset].
+  void initialize(Asset asset);
+  /// Import [payload] and assign it to imported field in [asset].
+  Future<Asset> import(dynamic payload, Asset asset, AssetPackTrace tracer);
+  /// Delete [imported] object.
+  void delete(dynamic imported);
 }

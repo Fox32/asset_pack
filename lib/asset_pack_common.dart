@@ -18,30 +18,23 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-library asset_pack;
+/// Part of the asset_pack package that is shared between browser and standalone
+/// VM code.
+library asset_pack_common;
 
-import 'dart:html';
+import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
-import 'dart:async';
-import 'dart:math';
-import 'asset_pack_file.dart';
 
-part 'src/asset_pack/asset_pack_trace.dart';
-part 'src/asset_pack/asset.dart';
-part 'src/asset_pack/asset_importer.dart';
-part 'src/asset_pack/asset_manager.dart';
-part 'src/asset_pack/asset_pack.dart';
-part 'src/asset_pack/decoders/base_64_decoder.dart';
-part 'src/asset_pack/importers/json_importer.dart';
-part 'src/asset_pack/importers/noop_importer.dart';
-part 'src/asset_pack/importers/pack_importer.dart';
-part 'src/asset_pack/importers/text_importer.dart';
-part 'src/asset_pack/asset_loader.dart';
-part 'src/asset_pack/loaders/arraybuffer_loader.dart';
-part 'src/asset_pack/loaders/blob_loader.dart';
-part 'src/asset_pack/loaders/image_loader.dart';
-part 'src/asset_pack/loaders/map_loader.dart';
-part 'src/asset_pack/loaders/text_loader.dart';
-part 'src/asset_pack/loaders/video_loader.dart';
-part 'src/asset_pack/progress_controler.dart';
+part 'src/asset_pack_common/asset_pack_file.dart';
+part 'src/asset_pack_common/asset_pack_trace.dart';
+part 'src/asset_pack_common/asset.dart';
+part 'src/asset_pack_common/asset_importer.dart';
+part 'src/asset_pack_common/asset_manager.dart';
+part 'src/asset_pack_common/asset_pack.dart';
+part 'src/asset_pack_common/decoders/base_64_decoder.dart';
+part 'src/asset_pack_common/importers/json_importer.dart';
+part 'src/asset_pack_common/importers/noop_importer.dart';
+part 'src/asset_pack_common/importers/pack_importer.dart';
+part 'src/asset_pack_common/importers/text_importer.dart';
+part 'src/asset_pack_common/asset_loader.dart';

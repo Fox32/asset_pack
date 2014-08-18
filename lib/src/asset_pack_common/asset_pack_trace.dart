@@ -18,7 +18,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of asset_pack;
+part of asset_pack_common;
 
 class AssetPackTraceEvent {
   static const PackImportStart = 'PackImportStart';
@@ -40,6 +40,7 @@ class AssetPackTraceEvent {
     json['type'] = type;
     json['label'] = label;
     json['timestamp'] = microseconds;
+    return json;
   }
 
   String toString() {

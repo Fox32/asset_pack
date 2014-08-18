@@ -18,14 +18,32 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of asset_pack;
+part of asset_pack_standalone;
 
-class TextLoader extends AssetLoader {
-  Future<dynamic> load(Asset asset, AssetPackTrace tracer) {
-    return AssetLoader.httpLoad(asset, 'text', (x) =>  x.responseText, tracer);
-  }
+/// A [AssetLoader] for use in a standalone VM.
+abstract class AssetLoaderStandalone extends AssetLoader {
 
-  void delete(dynamic arg) {
+  static Future<String> loadText(Asset asset, AssetPackTrace tracer) {
+    tracer.assetLoadStart(asset);
+    var completer = new Completer<String>();
 
+    var file = new File(asset.url);
+
+    file.readAsString().catchError((e, s) {
+      tracer.assetLoadError(
+          asset,
+          "Error while loading : $e : $s"
+      );
+
+      tracer.assetLoadEnd(asset);
+
+      completer.complete(null);
+    }).then((t) {
+      tracer.assetLoadEnd(asset);
+
+      completer.complete(t);
+    });
+
+    return completer.future;
   }
 }

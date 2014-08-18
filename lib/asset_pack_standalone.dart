@@ -18,16 +18,16 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of asset_pack;
+/// asset_pack library based on dart:io.
+library asset_pack_standalone;
 
-/// Interface of an [AssetImporter]. An asset importer is responsible for
-/// Initializing the [Asset.imported] field and importing an object
-/// returned from a loader.
-abstract class AssetImporter {
-  /// Must initialize imported field in [asset].
-  void initialize(Asset asset);
-  /// Import [payload] and assign it to imported field in [asset].
-  Future<Asset> import(dynamic payload, Asset asset, AssetPackTrace tracer);
-  /// Delete [imported] object.
-  void delete(dynamic imported);
-}
+import 'dart:io';
+import 'dart:async';
+import 'dart:convert';
+import 'package:asset_pack/asset_pack_common.dart';
+export 'package:asset_pack/asset_pack_common.dart';
+
+part 'src/asset_pack_standalone/asset_manager_standalone.dart';
+part 'src/asset_pack_standalone/asset_loader_standalone.dart';
+part 'src/asset_pack_standalone/loaders/map_loader.dart';
+part 'src/asset_pack_standalone/loaders/text_loader.dart';

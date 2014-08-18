@@ -18,17 +18,16 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of asset_pack;
+part of asset_pack_browser;
 
-/// Interface of an [AssetLoader]. An asset loader is responsible
-/// for loading an object from a url pointing to a network or filesystem.
-abstract class AssetLoader {
+/// A [AssetLoader] for use in browsers.
+abstract class AssetLoaderBrowser extends AssetLoader {
 
   static Future<dynamic> httpLoad(
       Asset asset,
       String responseType,
       dynamic extractResponse(HttpRequest),
-      AssetPackTrace tracer ) {
+      AssetPackTrace tracer) {
     tracer.assetLoadStart(asset);
     var completer = new Completer<dynamic>();
 
@@ -64,8 +63,16 @@ abstract class AssetLoader {
     return completer.future;
   }
 
-  /// Fetch [asset] Url.
-  Future<dynamic> load(Asset asset, AssetPackTrace tracer);
-  /// Delete fetched [arg].
-  void delete(dynamic arg);
+  static Future<String> httpLoadText(Asset asset, AssetPackTrace tracer) {
+    return httpLoad(asset, 'text', (x) =>  x.responseText, tracer);
+  }
+
+  static Future<dynamic> httpLoadArrayBuffer(Asset asset,
+      AssetPackTrace tracer) {
+    return httpLoad(asset, 'arraybuffer', (x) =>  x.response, tracer);
+  }
+
+  static Future<Blob> httpLoadBlob(Asset asset, AssetPackTrace tracer) {
+    return httpLoad(asset, 'blob', (x) =>  x.response, tracer);
+  }
 }
