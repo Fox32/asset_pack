@@ -125,6 +125,12 @@ class AssetPack {
     assets.remove(name);
   }
 
+  /// Reload a asset. This reruns the loader and the importer. The importer
+  /// can either modify the already imported object or create a new one.
+  Future<Asset> reloadAsset(Asset asset) {
+    return manager._loadAndImport(asset);
+  }
+
   /// Get asset's imported property at [path].
   dynamic getImportedAtPath(String path) {
     List<String> splitPath = path.split(".");
@@ -234,9 +240,7 @@ class AssetPack {
   }
 
   /// Reloads all assets in the pack. Does not reload the .pack file.
-  void reload() {
-    assets.forEach((name, asset) {
-      asset.reload();
-    });
+  Future reload() {
+    return Future.forEach(assets.values, (a) => reloadAsset(a));
   }
 }
