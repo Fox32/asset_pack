@@ -71,7 +71,31 @@ class Manager {
       }));
     });
   }
+  static void reloadTest() {
+    AssetManager assetManager = new AssetManagerBrowser();
+    Future<AssetPack> futurePack;
+    test('sub pack', () {
+      futurePack = assetManager.loadPack('testpack', 'testpack/_.pack');
+      futurePack.then(expectAsync((pack) {
+        // Test reload on sub pack as reloading nested packs is not supported
+        // at the moment.
+        var subpack = assetManager['testpack.subpack'];
+        // Store the current map to check against after reload.
+        var firstLoadMap = assetManager['testpack.subpack.somemap'];
 
+        subpack.reload().then(expectAsync((_) {
+          expect(assetManager['testpack.subpack'].length, 1);
+          expect(assetManager['testpack.subpack.somemap'], isNot(same(firstLoadMap)));
+          expect(assetManager['testpack.subpack.somemap'].containsKey('a'), true);
+          expect(assetManager['testpack.subpack.somemap']['a'], 'b');
+          expect(assetManager['testpack.subpack'].parent,
+                 assetManager['testpack']);
+          expect(pack['subpack'].type('somemap'), 'json');
+          expect(assetManager.getAssetAtPath('testpack.subpack.somemap').status, equals('OK'));
+        }));
+      }));
+    });
+  }
   static void unloadTest() {
     test('unload', () {
       AssetPackTrace trace = new AssetPackTrace();
@@ -258,6 +282,9 @@ class Manager {
   static void runTests() {
     group('loadPack', () {
       loadTest();
+    });
+    group('reloadPack', () {
+      reloadTest();
     });
     group('unloadpack', () {
       unloadTest();
