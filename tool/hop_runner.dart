@@ -10,8 +10,9 @@ void main(List<String> args) {
   //
   // Analyzer
   //
-  addTask('analyze_lib', createAnalyzerTask(['lib/asset_pack.dart',
-                                                 'lib/asset_pack_file.dart']));
+  addTask('analyze_lib', createAnalyzerTask(['lib/asset_pack_common.dart',
+                                             'lib/asset_pack_browser.dart',
+                                             'lib/asset_pack_standalone.dart']));
 
   addTask('analyze_test', createAnalyzerTask(['test/tests.dart']));
 
